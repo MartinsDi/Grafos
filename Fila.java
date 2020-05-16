@@ -5,6 +5,8 @@
  */
 package trabgrafo;
 
+import static java.lang.Thread.sleep;
+
 /**
  *
  * @author Artur
@@ -101,51 +103,74 @@ public class Fila {
         }
 
     }
-    public void encontra(Fila visita, String inicia, String busca) {
-        percorre(visita, inicia);
-        if (find) {
 
-            No aux = visita.inicio;
-            while (aux != null) {
-                if (!aux.getNome().equalsIgnoreCase(busca)) {
-                    abreVizinho(aux.vizinhos, visita);
-                    aux.setVisitado(true);
-                    //String a = visita.dequeue().getNome();
-                   // System.out.println(a);
-                }else{
-                    System.out.println("Vertice encontrado");
-                    System.out.println(aux.getNome());
-                    System.out.println(busca);
-                }
-            }
-        }
-
-    }
-
-    public void percorre(Fila visita, String busca) {
+    public boolean busca(Fila visita, String inicial, String busca) throws InterruptedException {
         No aux;
         aux = this.inicio;
-        while (aux != null || !find) {
-            if (aux.getNome().equalsIgnoreCase(busca)) {
-                aux.setVisitado(true);
+        No vis;
+
+        System.out.println("");
+        System.out.println("tostring " + visita.toString() + " tostring");
+
+        while (aux != null) {
+            System.out.println(visita.toString());
+            if (aux.getNome().equalsIgnoreCase(inicial)) {
+                System.out.println(aux.getNome());
+                System.out.println(inicial);
                 visita.enqueue(aux);
+                aux.setVisitado(true);
+                break;
+            }
+            aux = aux.getProx();
+        }
+
+        if (aux.getNome().equalsIgnoreCase(busca)) {
+            find = true;
+            return find;
+        }
+        //primeiro compara
+        vis = visita.inicio;
+        while (find != true) {
+            incrementa(visita, vis);
+            vis = vis.getProx();
+            vis.setVisitado(true);
+            if (vis.getNome().equalsIgnoreCase(busca)) {
                 find = true;
+                return find;
+            }
+            buscaVizinhos(visita, vis);
+            vis = vis.getProx();
+            vis.setVisitado(true);
+        }
+        return find;
+
+    }
+
+    public void incrementa(Fila visita, No vis) {
+        No aux = vis.vizinhos.inicio;
+        
+
+        while (aux != null) {
+            if (!aux.getVisitado()) {
+                visita.enqueue(aux);
+                aux.setVisitado(true);
             }
             aux = aux.getProx();
         }
     }
 
-    public void abreVizinho(Fila vizinhos, Fila visita) {
-
-        No aux;
-        aux = vizinhos.inicio;
+    public void buscaVizinhos(Fila visita, No vis) {
+        No aux = this.inicio;
         while (aux != null) {
-            visita.enqueue(aux);
+            if (aux.getNome().equals(vis.getNome())) {
+                visita.enqueue(aux);
+                break;
+            }
+
             aux = aux.getProx();
         }
 
     }
-    
 
     @Override
     public String toString() {

@@ -4,6 +4,7 @@ public class No {
 
     private String nome;
     private boolean visitado;
+    private boolean adicionado;
     private No prox;
     Fila vizinhos= new Fila();
     private int peso;
@@ -28,7 +29,7 @@ public class No {
         this.nome = nome;
     }
 
-    public boolean isVisitado() {
+    public boolean getVisitado() {
         return visitado;
     }
 

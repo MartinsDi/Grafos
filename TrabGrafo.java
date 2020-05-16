@@ -30,7 +30,7 @@ public class TrabGrafo {
         return caminho;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         int direc;
         int vertices;
         Fila vertice = new Fila();
@@ -74,7 +74,6 @@ public class TrabGrafo {
                 while (srt.hasMoreTokens()) {
                     String u = srt.nextToken();
                     String v = srt.nextToken();
-                    No novo = new No(v);
                     vertice.adicionaVizinho(u, v, vertices);
                 }
                 linha = BR.readLine();
@@ -93,9 +92,9 @@ public class TrabGrafo {
             
             
         }
-            String a = JOptionPane.showInputDialog(null,"Digite o vertice de partida: " );
-            String b = JOptionPane.showInputDialog(null,"Digite o vertice de chegada: " );
-            vertice.encontra(visita, a, b);
+            String a = "A";//JOptionPane.showInputDialog(null,"Digite o vertice de partida: " );
+            String b = "D";//JOptionPane.showInputDialog(null,"Digite o vertice de chegada: " );
+            vertice.busca(visita, a, b);
                 System.out.println(visita.toString());
 
     }
