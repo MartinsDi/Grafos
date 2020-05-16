@@ -1,0 +1,13 @@
+1
+4
+A
+B
+C
+D
+A,B
+A,C
+C,B
+B,A
+C,D
+D,B
+C,A
