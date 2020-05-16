@@ -92,8 +92,8 @@ public class TrabGrafo {
             
             
         }
-            String a = "A";//JOptionPane.showInputDialog(null,"Digite o vertice de partida: " );
-            String b = "D";//JOptionPane.showInputDialog(null,"Digite o vertice de chegada: " );
+            String a = JOptionPane.showInputDialog(null,"Digite o vertice de partida: " );
+            String b = JOptionPane.showInputDialog(null,"Digite o vertice de chegada: " );
             vertice.busca(visita, a, b);
                 System.out.println(visita.toString());
 
